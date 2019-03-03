@@ -9,7 +9,6 @@ bin/
 scripts/
 data/
 missions/xrelay/
-src/CMakeLists.txt
 src/pExampleApp/
 src/lib_behaviors-test/
 src/pXRelayTest/
