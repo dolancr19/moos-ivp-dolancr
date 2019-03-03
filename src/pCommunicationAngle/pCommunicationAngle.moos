@@ -1,9 +1,0 @@
-//------------------------------------------------
-// pCommunicationAngle config block
-
-ProcessConfig = pCommunicationAngle
-{
-   AppTick   = 4
-   CommsTick = 4
-}
-
