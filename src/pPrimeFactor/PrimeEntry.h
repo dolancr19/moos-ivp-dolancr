@@ -26,7 +26,7 @@ class PrimeEntry
       PrimeEntry(){};
       ~PrimeEntry(){};
 
-      void setOriginalVal(unsigned long int value);
+      void setOriginalVal(uint64_t value);
       void setReceivedIndex(unsigned int ri);
       void setStartTime();
       void setCalculatedIndex(unsigned int ci);  
