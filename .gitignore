@@ -9,8 +9,9 @@ bin/
 scripts/
 data/
 missions/xrelay/
+missions/lab_07
 src/pExampleApp/
 src/lib_behaviors-test/
 src/pXRelayTest/
-src/pCommunicationAngle/
+
 

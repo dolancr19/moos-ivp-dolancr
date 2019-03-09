@@ -1,0 +1,28 @@
+ServerHost = oceanai.mit.edu
+ServerPort = 9011
+
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = MOOSDB		@ NewConsole = false
+  Run = uXMS            @ NewConsole = true
+  Run = pCommunicationAngle	@ NewConsole = true ~ pCommunicationAngle_dolancr
+  
+}
+
+ProcessConfig = uXMS
+ {
+   VAR            = ACOUSTIC_PATH_REF, CONNECTIVITY_LOCATION_REF, ACOUSTIC_PATH, CONNECTIVITY_LOCATION, ELEV_ANGLE_REF
+ }
+
+ProcessConfig = pCommunicationAngle_dolancr
+{
+   AppTick   = 4
+   CommsTick = 4
+
+   //surface_sound_speed = 1480
+   //sound_speed_gradient = .016
+   //water_depth = 6000
+}
+
