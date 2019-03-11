@@ -1,0 +1,132 @@
+//***********************************************************/
+//*    NAME: Christopher Dolan                              */
+//*    CONTACT: dolancr@mit.edu                             */
+//*    ORGN: MIT                                            */
+//*    FILE: bravo.bhv                                      */
+//*    DATE: 07 March 2019                                  */
+//***********************************************************/
+
+initialize   DEPLOY = false
+initialize   RETURN = false
+initialize   LOITER_REGION = west
+	
+//----------------------------------------------
+Behavior = BHV_Loiter
+{ 
+  name      = loiter_west
+  priority  = 100
+  condition = DEPLOY = true
+  condition = LOITER_REGION = west
+  condition = RETURN = false
+
+              speed = 2.5
+          clockwise = false
+             radius = 4.0
+          nm_radius = 25.0
+            polygon = format=radial, x=100, y=-75, radius=30, pts=8
+           duration = 150
+          perpetual = true
+duration_idle_decay = false
+            endflag = LOITER_REGION = east
+}
+
+//----------------------------------------------
+Behavior = BHV_Loiter
+{ 
+  name      = loiter_east
+  priority  = 100
+  condition = DEPLOY = true
+  condition = LOITER_REGION = east
+  condition = RETURN = false
+
+              speed = 2.5
+          clockwise = true
+             radius = 4.0
+          nm_radius = 25.0
+            polygon = format=radial, x=160, y=-75, radius=20, pts=8
+           duration = 150
+          perpetual = true
+duration_idle_decay = false
+            endflag = LOITER_REGION = west
+}
+
+//----------------------------------------------
+Behavior=BHV_Waypoint
+{
+  name       = waypt_return
+  pwt        = 100
+  condition  = RETURN = true
+  condition  = DEPLOY = true
+  perpetual  = true
+  updates    = RETURN_UPDATE
+  endflag    = RETURN = false
+  endflag    = DEPLOY = false
+  endflag    = MISSION = complete
+	
+           speed = 2.5
+  capture_radius = 2.0
+     slip_radius = 8.0
+          points = 0,0
+ }
+
+Behavior = BHV_ConstantDepth
+ {
+   // General Behavior Parameters
+   // ---------------------------
+   name         = const_dep_west  
+   pwt          = 100             
+   condition    = DEPLOY = true
+   condition    = LOITER_REGION = west
+   condition    = RETURN = false
+   updates      = CONST_DEP__WEST_UPDATES
+
+   // Parameters specific to this behavior
+   // ------------------------------------
+            basewidth = 100          
+                depth = 30           
+   depth_mismatch_var = DEPTH_DIFF   
+             duration = no-time-limit
+            peakwidth = 3            
+          summitdelta = 50           
+ }
+
+Behavior = BHV_ConstantDepth
+ {
+   // General Behavior Parameters
+   // ---------------------------
+   name         = const_dep_east   
+   pwt          = 100              
+   condition = DEPLOY = true
+   condition = LOITER_REGION = east
+   condition = RETURN = false
+   updates      = CONST_DEP_EAST_UPDATES
+
+   // Parameters specific to this behavior
+   // ------------------------------------
+            basewidth = 100          
+                depth = 10           
+   depth_mismatch_var = DEPTH_DIFF   
+             duration = no-time-limit
+            peakwidth = 3            
+          summitdelta = 50           
+ }
+
+Behavior = BHV_ConstantDepth
+ {
+   // General Behavior Parameters
+   // ---------------------------
+   name         = const_dep_return   
+   pwt          = 100                
+   condition    = DEPLOY = true
+   condition    = RETURN = true
+   updates      = CONST_DEP_RETURN_UPDATES
+
+   // Parameters specific to this behavior
+   // ------------------------------------
+            basewidth = 100          
+                depth = 0            
+   depth_mismatch_var = DEPTH_DIFF   
+             duration = no-time-limit
+            peakwidth = 3            
+          summitdelta = 50           
+ }
