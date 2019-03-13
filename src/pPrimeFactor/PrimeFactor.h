@@ -41,13 +41,12 @@ class PrimeFactor : public CMOOSApp
       void RegisterVariables();
 
     private: // Configuration variables
-      unsigned int      ri=1;
-      unsigned int      ci=1;
-      unsigned long int max_steps=100000;
+      unsigned int    m_ri=1;
+      unsigned int    m_ci=1;
+      unsigned long int m_max_steps=100000;
    
     private: // State variables
-      list<PrimeEntry>  primes;
-      bool              complete;
-      bool              finished;
+      list<PrimeEntry>  m_primes;
+     
   };
 #endif

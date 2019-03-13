@@ -23,8 +23,8 @@ class PrimeEntry
   {
     public:
 
-      PrimeEntry(){};
-      ~PrimeEntry(){};
+      PrimeEntry();
+      ~PrimeEntry();
 
       void setOriginalVal(uint64_t value);
       void setReceivedIndex(unsigned int ri);

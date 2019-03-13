@@ -15,11 +15,9 @@ using namespace std;
 
 PrimeFactor::PrimeFactor()
   {
-    list<PrimeEntry> primes;
-    PrimeEntry working;  
-    unsigned int ri = 1;
-    unsigned int ci = 1;
-    unsigned long int max_steps = 100000;
+    m_ri = 1;
+    m_ci = 1;
+    m_max_steps = 100000;
   }
 
 //---------------------------------------------------------
@@ -46,14 +44,14 @@ bool PrimeFactor::OnNewMail(MOOSMSG_LIST &NewMail)
 	PrimeEntry working;
         // Set required initial parameters
 	working.setOriginalVal(value);
-        working.setReceivedIndex(ri);
+        working.setReceivedIndex(m_ri);
         working.setStartTime();
         // Place the object in the primes list work queue
-	primes.push_back(working);
+	m_primes.push_back(working);
         // Increment received index in preparation for next mail
-	ri+=1;
-        return(true);
+	m_ri+=1;
       }
+    return(true);
   }
 
 //---------------------------------------------------------
@@ -75,24 +73,24 @@ bool PrimeFactor::Iterate()
   {
     // Initialize iterator
     list<PrimeEntry>::iterator p;
-    for (p=primes.begin(); p!=primes.end(); p++)
+    for (p=m_primes.begin(); p!=m_primes.end(); p++)
       {
         // Extract an object from the work queue
 	PrimeEntry &factoring = *p;
         // Execute factoring function on the extracted object
-	complete = factoring.factor(max_steps);
+	factoring.factor(m_max_steps);
         // Determine if calculation complete
-	finished = factoring.done();
+	bool finished = factoring.done();
         // If the calculation is finished, construct the required output and publish to the MOOSDB
 	if (finished)
 	  {
-	    factoring.setCalculatedIndex(ci);
+	    factoring.setCalculatedIndex(m_ci);
 	    // Increment the calculated index counter
-	    ci+=1;
+	    m_ci+=1;
 	    string output = factoring.getReport();
             Notify("PRIME_RESULT", output.c_str());
             // Remove the completed object from the work queue
-	    p=primes.erase(p);
+	    p=m_primes.erase(p);
 	  }
       }
     return(true);

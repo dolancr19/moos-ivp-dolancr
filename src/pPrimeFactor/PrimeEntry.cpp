@@ -16,20 +16,37 @@
 #include <iostream>
 using namespace std;
 
+//---------------------------------------------------------
+// Constructor
+
+PrimeEntry::PrimeEntry()
+  {
+    uint64_t          m_start_index=3;
+    bool              m_done=false;
+  }
+
+//---------------------------------------------------------
+// Destructor
+
+PrimeEntry::~PrimeEntry()
+  {
+  }
+
+
 void PrimeEntry::setOriginalVal(uint64_t value)
   {
     m_orig = value;
     m_remain = value;
   }
 
-void PrimeEntry::setReceivedIndex(unsigned int ri)
+void PrimeEntry::setReceivedIndex(unsigned int m_ri)
   {
-    m_received_index = ri;
+    m_received_index = m_ri;
   }
 
-void PrimeEntry::setCalculatedIndex(unsigned int ci)
+void PrimeEntry::setCalculatedIndex(unsigned int m_ci)
   {
-    m_calculated_index = ci;
+    m_calculated_index = m_ci;
   }
 
 bool PrimeEntry::done()
@@ -42,7 +59,7 @@ void PrimeEntry::setStartTime()
     m_start_time = MOOSTime();
   }
 
-bool PrimeEntry::factor(unsigned long int max_steps)
+bool PrimeEntry::factor(unsigned long int m_max_steps)
   {
     // Set or reset the steps counter to 1
     m_current_steps=1;
@@ -54,7 +71,7 @@ bool PrimeEntry::factor(unsigned long int max_steps)
       }
     // The remainder must be odd, so the for loop can increment by 2 each step
     // The for loop logic prevents iterating past the square root of the original number or the max allowed steps
-    for (int jj = m_start_index; (jj<=sqrt(m_orig)) && (m_current_steps<=max_steps); jj+=2)
+    for (int jj = m_start_index; (jj<=sqrt(m_orig)) && (m_current_steps<=m_max_steps); jj+=2)
       {
         // The while loop ensures a factor that divides more than once will be properly accounted for
 	while (m_remain % m_start_index == 0)
@@ -67,7 +84,7 @@ bool PrimeEntry::factor(unsigned long int max_steps)
         m_start_index+=2;
       }   
     // If the loop completed without reachin max allowed steps, the calculation is complete
-    if (m_current_steps <= max_steps)
+    if (m_current_steps <= m_max_steps)
       {
         // Ensure all factors are accounted for
 	if (m_remain != 1)
@@ -90,7 +107,7 @@ string PrimeEntry::getReport()
     // Generate a string for the required output
     stringstream ss;
     ss << "orig=" << m_orig << ",received=" << m_received_index << ",calculated=" << m_calculated_index << ",solve_time=" << m_calc_time << ",primes=" << m_factors[0];
-    for (int jj=1;jj<m_factors.size();jj++)
+    for (unsigned int jj=1;jj<m_factors.size();jj++)
       {
         ss << ":" << m_factors[jj];
       }

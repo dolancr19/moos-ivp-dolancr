@@ -1,0 +1,51 @@
+// MOOS file
+
+ServerHost = localhost
+ServerPort = 9000
+Community  = apples
+
+//------------------------------------------
+// Antler configuration  block
+ProcessConfig = ANTLER
+{
+  MSBetweenLaunches = 200
+
+  Run = MOOSDB       @ NewConsole = false
+  Run = pXRelay      @ NewConsole = true ~ pXRelay_APPLES
+  Run = uXMS         @ NewConsole = true
+  Run = pShare       @ NewConsole = false
+}
+
+
+//------------------------------------------
+ProcessConfig = pXRelay_APPLES
+{
+   AppTick   = 4
+   CommsTick = 4
+ 
+   OUTGOING_VAR = APPLES
+   INCOMING_VAR = PEARS
+}
+
+//------------------------------------------
+// uXMS configuration block
+
+ProcessConfig = uXMS
+{
+   AppTick   = 4
+   CommsTick = 4
+ 
+   VAR = PEARS,  PEARS_ITER_HZ,  PEARS_POST_HZ
+   VAR = APPLES, APPLES_ITER_HZ, APPLES_POST_HZ
+}
+
+ProcessConfig = pShare
+ {
+   AppTick    = 4
+   CommsTick  = 4
+
+   input  = route = localhost:9200
+
+   output = src_name=APPLES, route=localhost:9201
+ }
+
