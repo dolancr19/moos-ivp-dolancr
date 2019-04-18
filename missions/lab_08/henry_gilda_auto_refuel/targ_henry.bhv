@@ -133,6 +133,7 @@ Behavior = BHV_Timer
    duration_idle_decay = false
           endflag      = REFUELING = false
 	  endflag      = LOITER = true
+	  endflag      = AUTO_REFUEL_RESET = true
           updates      = TIMER_RUN_UPDATES   
  }
 //----------------------------------------------
@@ -146,5 +147,6 @@ Behavior = BHV_Timer
           perpetual    = true
    duration_idle_decay = false
           endflag      = REFUEL_NEEDED = true
+	  duration_reset = AUTO_REFUEL_RESET
 	  updates      = AUTO_REFUEL_UPDATES   
  }
