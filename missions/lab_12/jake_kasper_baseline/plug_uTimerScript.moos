@@ -1,0 +1,18 @@
+//--------------------------------------------------------
+//uTimerScript Configuration Block (Created from Plugin)
+
+ProcessConfig = uTimerScript
+{
+  AppTick     = 2
+  CommsTick   = 2
+  
+  condition = DEPLOY = true
+
+  event = var = VEHICLE_REPORT_REQUEST, val = true, time=70 
+
+//  event = var = NODE_MESSAGE_LOCAL, val= "src_node=$(VNAME), dest_node=all, var_name = HAZARDSET_REQUEST, string_val=true", time=60
+
+  
+  reset_max = nolimit
+  reset_time = all-posted 
+}
