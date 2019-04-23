@@ -18,7 +18,7 @@
 #include "MBUtils.h"
 #include <cstdlib>
 #include <math.h> 
-#include <cstdint>
+#include <stdint.h>
 #include <iostream>
 #include <vector>
 
@@ -41,9 +41,9 @@ class PrimeFactor : public CMOOSApp
       void RegisterVariables();
 
     private: // Configuration variables
-      unsigned int    m_ri=1;
-      unsigned int    m_ci=1;
-      unsigned long int m_max_steps=100000;
+      unsigned int    m_ri;
+      unsigned int    m_ci;
+      unsigned long int m_max_steps;
    
     private: // State variables
       list<PrimeEntry>  m_primes;
