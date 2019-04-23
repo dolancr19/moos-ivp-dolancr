@@ -35,8 +35,8 @@ class PrimeEntry
       string  getReport();
 
   private: // Configuration variables
-      uint64_t          m_start_index=3;
-      bool              m_done=false;
+      uint64_t          m_start_index;
+      bool              m_done;
 
   private: // State variables
       uint64_t          m_orig;
