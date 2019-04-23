@@ -12,7 +12,7 @@
 #include <string>
 #include <sstream>
 #include <vector> 
-#include <cstdint>
+#include <stdint.h>
 #include "MOOS/libMOOS/MOOSLib.h"
 #include "MBUtils.h"
 #include <iostream>
@@ -35,7 +35,7 @@ class PrimeEntry
       string  getReport();
 
   private: // Configuration variables
-      uint64_t          m_start_index;
+      int          m_start_index;
       bool              m_done;
 
   private: // State variables
