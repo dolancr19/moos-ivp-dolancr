@@ -36,6 +36,9 @@ BHV_ZigLeg::BHV_ZigLeg(IvPDomain domain) :
   m_angle=0;
   m_priority_wt=100;
   m_osh=0;
+  m_curr_time=0;
+  m_post_time=0;
+  m_post_test=false;
   
 }
 
@@ -130,7 +133,7 @@ IvPFunction* BHV_ZigLeg::onRunState()
 bool ok1, ok2, ok3;
   m_osx=getBufferDoubleVal("NAV_X",ok1);
   m_osy=getBufferDoubleVal("NAV_Y",ok2);
-  m_osh=getBufferDoubleVal("NAV_HEADING");
+  //m_osh=getBufferDoubleVal("NAV_HEADING");
   if(!ok1 || !ok2)
     {
       postWMessage("No ownship X/Y in buffer.");
@@ -150,7 +153,7 @@ bool ok1, ok2, ok3;
 	{
 	  if(m_curr_time>=m_post_time)
 	    {
-	      desired_course=m_osh+m_angle;
+	      double desired_course=m_osh+m_angle;
 	      
              
 	      m_post_test=false;

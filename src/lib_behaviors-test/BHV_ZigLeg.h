@@ -31,6 +31,17 @@ protected: // Local Utility functions
 protected: // Configuration parameters
 
 protected: // State variables
+
+  double m_wpt_index;
+  double m_osx;
+  double m_osy;
+  double m_duration;
+  double m_angle;
+  double m_priority_wt;
+  double m_osh;
+  double m_curr_time;
+  double m_post_time;
+  bool m_post_test;
 };
 
 #define IVP_EXPORT_FUNCTION
