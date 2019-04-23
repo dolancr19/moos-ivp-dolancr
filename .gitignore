@@ -10,6 +10,5 @@ scripts/
 data/
 missions/xrelay/
 src/pExampleApp/
-src/lib_behaviors-test/
 src/pXRelayTest/
 
