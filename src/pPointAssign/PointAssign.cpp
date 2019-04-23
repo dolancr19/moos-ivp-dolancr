@@ -104,7 +104,7 @@ bool PointAssign::OnNewMail(MOOSMSG_LIST &NewMail)
 	      {
 		int pos = sval.find("id=");
 	        string id = sval.substr(pos+3);
-                int id_val = stoi(id.c_str());
+                int id_val = std::stoi(id.c_str());
 	        if (id_val%2 != 0)
 	          m_out1.push_back(sval);
 	        else

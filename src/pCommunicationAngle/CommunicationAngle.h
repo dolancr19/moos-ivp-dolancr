@@ -34,10 +34,10 @@ class CommunicationAngle : public CMOOSApp
    void RegisterVariables();
 
  private: // Configuration variables
-   bool m_collaborator_switch = true;
-   double surface_sound_speed=1480;
-   double sound_speed_gradient=.016;
-   double water_depth=6000;
+   bool m_collaborator_switch;
+   double surface_sound_speed;
+   double sound_speed_gradient;
+   double water_depth;
    double time_interval;
    
  private: // State variables
