@@ -21,8 +21,8 @@ using namespace std;
 
 PrimeEntry::PrimeEntry()
   {
-    uint64_t          m_start_index=3;
-    bool              m_done=false;
+    m_start_index=3;
+    m_done=false;
   }
 
 //---------------------------------------------------------
