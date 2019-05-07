@@ -63,12 +63,44 @@ TARGET_LINK_LIBRARIES(BHV_Pulse
    mbutil 
    ${SYSTEM_LIBS} )
 
-  #--------------------------------------------------------
+#--------------------------------------------------------
 #                                      BHV_ZigLeg
 #--------------------------------------------------------
 ADD_LIBRARY(BHV_ZigLeg SHARED 
    BHV_ZigLeg.cpp)
 TARGET_LINK_LIBRARIES(BHV_ZigLeg
+   geometry
+   helmivp
+   behaviors 
+   ivpbuild 
+   logic 
+   ivpcore 
+   bhvutil 
+   mbutil 
+   ${SYSTEM_LIBS} )
+
+#--------------------------------------------------------
+#                                      BHV_FrontSearch
+#--------------------------------------------------------
+ADD_LIBRARY(BHV_FrontSearch SHARED 
+   BHV_FrontSearch.cpp)
+TARGET_LINK_LIBRARIES(BHV_FrontSearch
+   geometry
+   helmivp
+   behaviors 
+   ivpbuild 
+   logic 
+   ivpcore 
+   bhvutil 
+   mbutil 
+   ${SYSTEM_LIBS} )
+
+#--------------------------------------------------------
+#                                      BHV_MaintainArea
+#--------------------------------------------------------
+ADD_LIBRARY(BHV_MaintainArea SHARED 
+   BHV_MaintainArea.cpp)
+TARGET_LINK_LIBRARIES(BHV_MaintainArea
    geometry
    helmivp
    behaviors 

@@ -39,6 +39,10 @@ BHV_ZigLeg::BHV_ZigLeg(IvPDomain domain) :
   m_curr_time=0;
   m_post_time=0;
   m_post_test=false;
+  m_off_time=0;
+  m_off_test=false;
+  m_desired_course=0;
+  m_course=false;
   
 }
 
@@ -58,9 +62,9 @@ bool BHV_ZigLeg::setParam(string param, string val)
   else if(param=="zig_angle")
     m_angle=double_val;
   else
-
     // If not handled above, then just return false;
-  return(false);
+    return(false);
+  return(true);
 }
 
 //---------------------------------------------------------------
@@ -130,10 +134,10 @@ IvPFunction* BHV_ZigLeg::onRunState()
   // Part 1: Build the IvP function
   IvPFunction *ipf = 0;
 
-bool ok1, ok2, ok3;
+  bool ok1, ok2, ok3, ok4;
   m_osx=getBufferDoubleVal("NAV_X",ok1);
   m_osy=getBufferDoubleVal("NAV_Y",ok2);
-  //m_osh=getBufferDoubleVal("NAV_HEADING");
+  m_osh=getBufferDoubleVal("NAV_HEADING",ok4);
   if(!ok1 || !ok2)
     {
       postWMessage("No ownship X/Y in buffer.");
@@ -146,19 +150,32 @@ bool ok1, ok2, ok3;
       if(new_index!=m_wpt_index)
 	{
 	  m_post_time=m_curr_time+5;
+	  m_off_time=m_curr_time+5+m_duration;
+	  
 	  m_post_test=true;
+	  m_off_test=true;
+	  m_course=true;
 	  m_wpt_index=new_index;
 	}
       if(m_post_test)
 	{
 	  if(m_curr_time>=m_post_time)
 	    {
-	      double desired_course=m_osh+m_angle;
-	      
-             
-	      m_post_test=false;
+	      if(m_course)
+		{
+		  m_desired_course=m_osh+m_angle;
+		  m_course=false;
+		}
+	      ipf = BuildZig();             
 	    }
-	  
+	}
+      if(m_off_test)
+	{
+	  if(m_curr_time>=m_off_time)
+	    {
+	      m_post_test=false;
+	      m_off_test=false;
+	    }
 	}
     }
 
@@ -171,3 +188,16 @@ bool ok1, ok2, ok3;
   return(ipf);
 }
 
+IvPFunction* BHV_ZigLeg::BuildZig()
+{
+  IvPFunction *ipf = 0;
+  
+
+	      ZAIC_PEAK zaic_peak(m_domain, "course");
+              zaic_peak.setSummit(m_desired_course);
+              zaic_peak.setMinMaxUtil(0, 100);
+              zaic_peak.setBaseWidth(60);
+              //IvPFunction *ipf = 0;
+              ipf = zaic_peak.extractIvPFunction();
+	      return(ipf);
+}

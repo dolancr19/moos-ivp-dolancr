@@ -10,6 +10,7 @@
 
 #include <string>
 #include "IvPBehavior.h"
+#include "ZAIC_PEAK.h"
 
 class BHV_ZigLeg : public IvPBehavior {
 public:
@@ -27,6 +28,7 @@ public:
   IvPFunction* onRunState();
 
 protected: // Local Utility functions
+  IvPFunction* BuildZig();
 
 protected: // Configuration parameters
 
@@ -42,6 +44,10 @@ protected: // State variables
   double m_curr_time;
   double m_post_time;
   bool m_post_test;
+  double m_off_time;
+  bool m_off_test;
+  double m_desired_course;
+  bool m_course;
 };
 
 #define IVP_EXPORT_FUNCTION

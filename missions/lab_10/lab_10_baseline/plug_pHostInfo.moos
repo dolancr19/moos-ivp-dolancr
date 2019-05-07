@@ -5,5 +5,5 @@ ProcessConfig = pHostInfo
 {
   AppTick 	= 1
   CommsTick 	= 1
-  default_hostip_force = 18.40.21.220
+  default_hostip_force = 18.21.178.59
 }

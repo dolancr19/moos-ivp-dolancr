@@ -9,6 +9,8 @@ bin/
 scripts/
 data/
 missions/xrelay/
+missions/lab_16/
 src/pExampleApp/
 src/pXRelayTest/
-
+src/lib_behaviors-test/
+src/pFrontEstimateX/

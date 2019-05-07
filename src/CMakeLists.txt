@@ -23,6 +23,7 @@ ADD_SUBDIRECTORY(lib_behaviors-test)
 #ADD_SUBDIRECTORY(pPointAssign)
 #ADD_SUBDIRECTORY(pGenPath)
 ADD_SUBDIRECTORY(uFldHazardMgrX)
+ADD_SUBDIRECTORY(pFrontEstimateX)
 #ADD_SUBDIRECTORY(pFoobar)
 
 
