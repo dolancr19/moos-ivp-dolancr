@@ -4,7 +4,7 @@ initialize   DEPLOY = false
 initialize   RETURN = false
 
 //----------------------------------------------
-Behavior = BHV_Waypoint
+Behavior = BHV_SimpleWaypointd
 { 
   name      = waypt_to_point
   pwt       = 100
@@ -16,7 +16,8 @@ endflag   = RETURN = true
 
   speed      = 2.0   // meters per second
   radius     = 8.0
-  point      = 100,-50
+  ptx        = 100
+  pty        = -50
 }
 
 //----------------------------------------------
